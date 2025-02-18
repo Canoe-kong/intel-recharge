@@ -1,0 +1,187 @@
+@unit: px;
+@step: 1;
+@i: 100;
+
+// 定义递归混入
+.loop(@i) when (@i > -1) {
+  .marginY@{i} {
+    margin-top:~"@{i}@{unit}";
+    margin-bottom:~"@{i}@{unit}";
+  }
+
+  .marginX@{i} {
+    margin-left:~"@{i}@{unit}";
+    margin-right:~"@{i}@{unit}";
+  }
+
+  .margin@{i} {
+    margin-top:~"@{i}@{unit}";
+    margin-bottom:~"@{i}@{unit}";
+    margin-left:~"@{i}@{unit}";
+    margin-right:~"@{i}@{unit}";
+  }
+
+  .margin-right@{i} {
+    margin-right:~"@{i}@{unit}";
+  }
+
+  .paddingY@{i} {
+    padding-top:~"@{i}@{unit}";
+    padding-bottom:~"@{i}@{unit}";
+  }
+
+  .paddingX@{i} {
+    padding-left:~"@{i}@{unit}";
+    padding-right:~"@{i}@{unit}";
+  }
+
+  .padding@{i} {
+    padding-top:~"@{i}@{unit}";
+    padding-bottom:~"@{i}@{unit}";
+    padding-left:~"@{i}@{unit}";
+    padding-right:~"@{i}@{unit}";
+  }
+
+  .padding-top@{i} {
+    padding-top:~"@{i}@{unit}";
+  }
+
+  .padding-bottom@{i} {
+    padding-bottom:~"@{i}@{unit}";
+  }
+
+  // 递归调用
+  .loop(@i - @step);
+}
+
+// 调用递归混入
+.loop(@i);
+
+
+/*! flex */
+
+.flex {
+  display: flex;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex-justify {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-align {
+  display: flex;
+  align-items: center;
+}
+
+.flex-align-justify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-align-justify-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-dx {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.flex-align-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-align-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flex-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+.flex-spacearound {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flex-spacebetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-align-spacearound {
+  .flex-align;
+  .flex-spacearound;
+}
+
+.flex-align-spacebetween {
+  .flex-align;
+  .flex-spacebetween;
+}
+
+.flex-baseline-spacearound {
+  .flex-baseline;
+  .flex-spacearound;
+}
+
+.flex-baseline-spacebetween {
+  .flex-baseline;
+  .flex-spacebetween;
+}
+
+.flex-nowrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-column-spacebetween {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-column-spacearound {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.itemflex-00auto {
+  flex: 0 0 auto;
+}
+
+.itemflex-11auto {
+  flex: 1 1 auto;
+}
+
+.flex-shrink0 {
+  flex-shrink: 0;
+}
+
+.align-self-stretch {
+  align-self: stretch;
+}
