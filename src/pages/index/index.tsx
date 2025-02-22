@@ -3,12 +3,15 @@ import { Button } from '@nutui/nutui-react-taro';
 import styles from './index.module.less';
 import CommonButton from '@/components/CommonButton';
 import router from '@/route';
+import services from '@/services';
 class Index extends Component {
   constructor(props: any) {
     super(props);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(services)
+  }
 
   componentWillUnmount() {}
 

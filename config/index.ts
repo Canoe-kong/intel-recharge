@@ -1,4 +1,19 @@
 const path = require('path');
+const H5_ENV = {
+  test: 'fat',
+  production: 'prod',
+  pre: 'pre'
+};
+const mode = process.env.MODE || 'test';
+const outputRootStrategy = {
+  h5: `h5/${H5_ENV[mode]}`,
+  weapp: 'weapp',
+  alipay: 'alipay',
+  swan: 'swan',
+  ['undefined']: 'dist'
+};
+const env = process.env.npm_config_argv? JSON.parse(process.env.npm_config_argv)['cooked'][1].split(':')[1]: 'h5';
+const outputRoot = outputRootStrategy[env];
 const config = {
   projectName: 'intel-recharge',
   date: '2025-2-18',
@@ -10,7 +25,7 @@ const config = {
     375: 2 / 1
   },
   sourceRoot: 'src',
-  outputRoot: 'dist',
+  outputRoot: `dist/${outputRoot}`,
   plugins: ['@tarojs/plugin-html'],
   defineConstants: {
   },
@@ -24,6 +39,9 @@ const config = {
   compiler: {
     type: 'webpack5',
     prebundle: { enable: false }
+  },
+  cache: {
+    enable: true // Webpack 持久化缓存配置，建议开启。默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
   },
   alias: {
     '@': path.resolve(__dirname, '..', 'src'),
