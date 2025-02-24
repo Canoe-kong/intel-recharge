@@ -4,6 +4,9 @@ import styles from './index.module.less';
 import CommonButton from '@/components/CommonButton';
 import router from '@/route';
 import services from '@/services';
+import createErrorBoundary from '@/pages/layouts';
+import { connect } from 'react-redux';
+
 class Index extends Component {
   constructor(props: any) {
     super(props);
@@ -38,4 +41,11 @@ class Index extends Component {
     );
   }
 }
-export default Index;
+export default connect((state) => {
+    console.group('redux数据');
+    console.log(`%c 新值`, `color: #03A9F4; font-weight: bold`, state);
+    // console.log(`%c 时间`, `color: #4CAF50; font-weight: bold`, dayjs().format('MM-DD HH:mm:ss'));
+    console.groupEnd();
+    return state;
+  })(createErrorBoundary(Index))
+;
