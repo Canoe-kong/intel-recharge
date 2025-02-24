@@ -8,6 +8,8 @@ import locales from './locales/index';
 import { cache, cacheKey } from '@/cache';
 import { Provider } from 'react-redux';
 import { store } from './model/store';
+import GlobalLoading from '@/components/GlobalLoading';
+
 class App extends Component<PropsWithChildren> {
   initLocale = () => {
     //1.使用系统语言的初始化方法,第一个参数是:语言类型 第二个参数是:词语仓库
@@ -24,9 +26,7 @@ class App extends Component<PropsWithChildren> {
     this.initLocale();
   }
   componentDidMount() {
-    console.log('store',store)
-    // console.log('zhCN',zhCN,ConfigProvider)
-   }
+  }
 
   componentDidShow() { }
 
@@ -38,8 +38,12 @@ class App extends Component<PropsWithChildren> {
   }
   render() {
     const { children } = this.props;
+
     return <ConfigProvider locale={zhCN}>
-      <Provider store={store}>{children}</Provider>
+      <Provider store={store}>
+        <GlobalLoading />
+        {children}
+      </Provider>
     </ConfigProvider>;
   }
 }

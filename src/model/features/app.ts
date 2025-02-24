@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: 0,
+  globalLoading:false
 };
 
 export const appSlice = createSlice({
@@ -17,8 +18,15 @@ export const appSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
+
+    showLoading(state) {
+      state.globalLoading = true;
+    },
+    hideLoading(state) {
+      state.globalLoading = false;
+    },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = appSlice.actions;
+export const { increment, decrement, incrementByAmount,showLoading ,hideLoading} = appSlice.actions;
 export default appSlice.reducer;
