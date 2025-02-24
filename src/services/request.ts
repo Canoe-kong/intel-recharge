@@ -347,7 +347,7 @@ export default {
   /**扫码 */
   async scan(scanUrl, loading) {
     // 屏蔽立充网点会员扫码进入
-    if (stopLcUrl(scanUrl)) {
+    if (utils.stopLcUrl(scanUrl)) {
       return;
     }
     const scanApiUrl = utils.isH5() ? API.SCAN_STATUS_H5 : API.SCAN_STATUS;
@@ -475,7 +475,7 @@ export default {
     );
     if (shop.success && shop.data && shop.data.id) {
       shop = shop.data;
-      return dealShop(shop);
+      return utils.dealShop(shop);
     } else {
       return null;
     }
@@ -518,7 +518,7 @@ export default {
     if (shops.success && shops.data && shops.data.totalCount) {
       shops = shops.data.list;
       return shops.map((shop) => {
-        return dealShop(shop);
+        return utils.dealShop(shop);
       });
     } else {
       return [];

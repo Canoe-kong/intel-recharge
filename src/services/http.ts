@@ -148,7 +148,7 @@ export const refreshToken = (): Promise<{ appToken: string; accessToken: string 
  * @param option 
  * @returns 
  */
-export const request = (url: string, option: Option): Promise<{ success: boolean, data: any }> => {
+export const request = (url: string, option?: Option): Promise<{ success: boolean, data: any }> => {
   const {
     loading = false,
     loadingText,
@@ -156,7 +156,7 @@ export const request = (url: string, option: Option): Promise<{ success: boolean
     method = 'POST',
     type = 'json',
     header = {},
-  } = option;
+  } = option || {};
 
   // 显示加载状态
   showLoading(loading, loadingText);
@@ -262,7 +262,7 @@ export const get = (url: string, option: Option = {}) => {
  * @param option 
  * @returns 
  */
-export const post = (url: string, option: Option) => {
+export const post = (url: string, option?: Option) => {
   return request(url, option);
 };
 

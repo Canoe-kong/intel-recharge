@@ -6,6 +6,8 @@ import './assets/styles/global.less';
 import i18n from 'taro-i18n';
 import locales from './locales/index';
 import { cache, cacheKey } from '@/cache';
+import { Provider } from 'react-redux';
+import { store } from './model/store';
 class App extends Component<PropsWithChildren> {
   initLocale = () => {
     //1.使用系统语言的初始化方法,第一个参数是:语言类型 第二个参数是:词语仓库
@@ -21,11 +23,14 @@ class App extends Component<PropsWithChildren> {
   componentWillMount() {
     this.initLocale();
   }
-  componentDidMount() {}
+  componentDidMount() {
+    console.log('store',store)
+    // console.log('zhCN',zhCN,ConfigProvider)
+   }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   /**v3.5及以上支持 React 渲染流程之外的 JS 错误都能被其监听到；当渲染错误没有被开发者设置的错误边界捕获时，渲染报错都可以被监听到。 */
   onError(error) {
@@ -33,7 +38,9 @@ class App extends Component<PropsWithChildren> {
   }
   render() {
     const { children } = this.props;
-    return <ConfigProvider locale={zhCN}>{children}</ConfigProvider>;
+    return <ConfigProvider locale={zhCN}>
+      <Provider store={store}>{children}</Provider>
+    </ConfigProvider>;
   }
 }
 export default App;
