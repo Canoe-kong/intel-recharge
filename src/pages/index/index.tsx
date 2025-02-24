@@ -41,11 +41,4 @@ class Index extends Component {
     );
   }
 }
-export default connect((state) => {
-    console.group('redux数据');
-    console.log(`%c 新值`, `color: #03A9F4; font-weight: bold`, state);
-    // console.log(`%c 时间`, `color: #4CAF50; font-weight: bold`, dayjs().format('MM-DD HH:mm:ss'));
-    console.groupEnd();
-    return state;
-  })(createErrorBoundary(Index))
-;
+export default createErrorBoundary(Index);
