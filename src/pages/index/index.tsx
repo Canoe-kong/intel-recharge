@@ -13,14 +13,13 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    console.log(services)
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   clickHandler() {
     console.log('clickHandler');

@@ -23,5 +23,6 @@ export interface CommonButtonProps  {
   id?: string,
   duration?: number,
   nativeType?: 'submit' | 'reset' | 'button',
+  className?: string,
   onClick: () => void
 }

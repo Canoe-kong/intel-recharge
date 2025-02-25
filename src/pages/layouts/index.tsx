@@ -5,7 +5,7 @@ import { showLoading, hideLoading } from '@/model/features/app';
 
 function createErrorBoundary(Page) {
   class ErrorBoundary extends Component {
-    el = React.createRef<{ componentDidShow?: () => void; componentDidHide?: () => void; onShareAppMessage?: () => void;componentDidMount?:()=>void }>();
+    el = React.createRef<{ componentDidShow?: () => void; componentDidHide?: () => void; onShareAppMessage?: () => void; componentDidMount?: () => void }>();
     state = {
       hasError: null,
     };
@@ -53,7 +53,7 @@ function createErrorBoundary(Page) {
     // console.log(`%c 时间`, `color: #4CAF50; font-weight: bold`, dayjs().format('MM-DD HH:mm:ss'));
     console.groupEnd();
     return state;
-  },{showLoading,hideLoading})(ErrorBoundary);
+  }, { showLoading, hideLoading })(ErrorBoundary);
 }
 
 export default createErrorBoundary;

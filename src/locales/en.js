@@ -477,5 +477,8 @@ export default function (value) {
     selectTip: 'Please read and check the User Agreement, Privacy Policy, etc',
     goShop:'View nearby rental stores',
     priceTips:`If less than ${value}, billed at ${value}`,
+    Simplified: 'Simplified Chinese',
+    Traditional: 'Traditional Chinese',
+    English: 'English',
   };
 }

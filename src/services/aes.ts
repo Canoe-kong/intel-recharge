@@ -18,8 +18,7 @@ const RSA_KEY_LIST = {
 }
 
 export const handleRsaKey = () => {
-  console.log('process.env.MODE',process.env.MODE)
-  const env = process.env.MODE === 'production' ? 'pro' : cache.get(cacheKey.CUR_ENV)
+  const env = process.env.TARO_APP_MODE === 'production' ? 'pro' : cache.get(cacheKey.CUR_ENV)
   return RSA_KEY_LIST[env]
 }
 

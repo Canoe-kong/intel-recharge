@@ -464,6 +464,9 @@ export default function(value) {
     comma: '，',
     selectTip: '請先閲讀並勾選用戶協議、隱私政策等',
     goShop: '查看附近可租借門店',
-    priceTips: `不足${value}按${value}計費`
+    priceTips: `不足${value}按${value}計費`,
+    Simplified: '簡體中文',
+    Traditional: '繁體中文',
+    English: 'English',
   };
 }

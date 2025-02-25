@@ -1,6 +1,6 @@
 import utils from "@/utils";
 import API from "./api";
-import { cache,cacheKey } from "@/cache";
+import { cache, cacheKey } from "@/cache";
 import Taro from "@tarojs/taro";
 import { get, post } from "@/services/http";
 export default {
@@ -526,7 +526,7 @@ export default {
   },
 
   /**微信验签 */
-  async wxSign(url, loading) {
+  async wxSign(url, loading?: boolean) {
     let result = await utils.trans(
       post(API.WECHAT_JSSDK_SIGN, {
         loading: loading,
@@ -536,6 +536,35 @@ export default {
       })
     );
     return result;
+  },
+
+  /**如果是微信内置浏览器，应该配置好wx.config */
+  async getToken() {
+    if (utils.browserEnv() !== utils.BROWSER_ENV.WX) {
+      return;
+    }
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await this.wxSign(location.href.split('#')[0]);
+        if (!res.data) {
+          return;
+        }
+        const { timestamp, nonceStr, signature } = res.data;
+        /**TODO 获取签名 */
+        wx.config({
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: utils.WX_GZH_APPID, // 必填，公众号的唯一标识
+          timestamp, // 必填，生成签名的时间戳
+          nonceStr, // 必填，生成签名的随机串
+          signature, // 必填，签名
+          jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表
+        });
+        resolve('获取接口成功');
+      } catch (error) {
+        console.log('获取验签失败', error);
+        reject();
+      }
+    });
   },
   /**错误页面的排队接口 */
   async queue(deviceId, loading) {

@@ -1,4 +1,4 @@
-import * as request from './request';
+import request from './request';
 import * as API from './api';
 import * as http from './http';
 

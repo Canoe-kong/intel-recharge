@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Button } from '@nutui/nutui-react-taro'
 import { CommonButtonProps } from './type'
-
+import styles from './index.module.less'
+import classNames from 'classnames'
 /**参考文档： https://nutui.jd.com/taro/react/2x/#/zh-CN/component/button */
 
 const CommonButton = (props: CommonButtonProps) => {
   const [loading, setLoading] = useState(false)
-  const { name = '', onClick, duration = 1500 } = props
+  const { name = '', onClick, duration = 1500, className } = props
   const clickHandler = () => {
     /**开启防抖 */
     setLoading(true)
@@ -18,9 +19,12 @@ const CommonButton = (props: CommonButtonProps) => {
   return (
 
     <Button
-      loading={loading}
+      // loading={loading}
       type="success"
       onClick={clickHandler}
+      className={classNames(styles.button, className)}
+      block
+      color="linear-gradient( 162deg, #0092F4 0%, #1377FE 100%)"
     >
       {name}
     </Button>

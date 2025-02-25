@@ -1,5 +1,6 @@
 import i18n from 'taro-i18n';
 import {cache,cacheKey} from '@/cache';
+import Taro from '@tarojs/taro';
 /**
  * 将对象转为query
  * @param {Object} query
@@ -33,7 +34,7 @@ export function trans(promise) {
     .then(data => {
       return data;
     })
-    .catch(err => err);
+    .catch(err => Taro.showToast({ title: err.message, icon: 'none' }));
 }
 
 
