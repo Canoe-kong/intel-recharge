@@ -13,6 +13,8 @@ import services from '@/services';
 import valid from '@/utils/validate';
 import widget from '@/utils/widget';
 import { cache, cacheKey } from '@/cache';
+import { WEBVIEW_KEY } from '@/utils/constant';
+import router from '@/route';
 const COUNT_DOWN_TIME = 60;
 
 const TelLogin = forwardRef(() => {
@@ -151,9 +153,9 @@ const TelLogin = forwardRef(() => {
   const selectHandle = () => {
     setSelected(!selected)
   }
-
-  const goExplain = () => {
-
+  /**隐私协议 */
+  const goExplain = (key) => {
+    router.go({ url: '/subPackages/others/webview/index', query: { type: key } })
   }
   return (
     <View className={classNames(styles.telLoginContainer)}>
@@ -223,7 +225,7 @@ const TelLogin = forwardRef(() => {
           <span
             className={styles.privacy}
             onClick={() => {
-              goExplain(1);
+              goExplain(WEBVIEW_KEY.SERVICE);
             }}>
             《{utils.intl('userAggrement')}》
           </span>
@@ -231,7 +233,7 @@ const TelLogin = forwardRef(() => {
           <span
             className={styles.privacy}
             onClick={() => {
-              goExplain(3);
+              goExplain(WEBVIEW_KEY.PRIVACY);
             }}>
             《{utils.intl('privacyPolicy')}》
           </span>

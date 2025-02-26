@@ -3,10 +3,10 @@ import Taro from '@tarojs/taro';
 interface RouteOptions {
   url?: string;
   query?: Record<string, any>;
-  success?: (params:any) => void;
+  success?: (params: any) => void;
 }
 class TaroRouter {
-  go({ url = '', query, success = () => {} }:RouteOptions = {}) {
+  go({ url = '', query, success = () => { } }: RouteOptions = {}) {
     return new Promise((resolve, reject) => {
       Taro.navigateTo({
         url: query ? `${url}?${utils.stringifyQuery(query)}` : url,
@@ -19,10 +19,10 @@ class TaroRouter {
     }).catch(() => utils.promisify(Taro.switchTab)({ url }));
   }
 
-  redirect({ url = '', query }:RouteOptions = {}) {
+  redirect({ url = '', query }: RouteOptions = {}) {
     return utils.promisify(Taro.redirectTo)({
-        url: query ? `${url}?${utils.stringifyQuery(query)}` : url,
-      })
+      url: query ? `${url}?${utils.stringifyQuery(query)}` : url,
+    })
       .catch(() => utils.promisify(Taro.switchTab)({ url }));
   }
 
@@ -30,7 +30,7 @@ class TaroRouter {
     return utils.promisify(Taro.navigateBack)({ delta });
   }
 
-  reLaunch({ url = '', query }:RouteOptions = {}) {
+  reLaunch({ url = '', query }: RouteOptions = {}) {
     return utils.promisify(Taro.reLaunch)({
       url: query ? `${url}?${utils.stringifyQuery(query)}` : url,
     });

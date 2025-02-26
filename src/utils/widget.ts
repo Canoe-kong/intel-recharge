@@ -1,13 +1,12 @@
 import Taro from '@tarojs/taro';
 import utils from '.';
 class Widget {
-
   toast(title: string, callback?: () => void, duration?: number) {
     Taro.showToast({
       icon: 'none',
       title: title,
       duration: duration || 2000,
-      mask: true,
+      mask: true
     });
     if (callback) {
       setTimeout(() => {
@@ -21,7 +20,7 @@ class Widget {
       icon: 'success',
       title: title,
       duration: duration || 2000,
-      mask: true,
+      mask: true
     });
     if (callback) {
       setTimeout(() => {
@@ -41,7 +40,7 @@ class Widget {
         if (callback) {
           callback();
         }
-      },
+      }
     });
   }
 
@@ -80,10 +79,9 @@ class Widget {
             cancel();
           }
         }
-      },
+      }
     });
   }
-
 }
 const widget = new Widget();
 export default widget;
