@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import { store } from './model/store';
 import GlobalLoading from '@/components/GlobalLoading';
 import '@nutui/nutui-react-taro/dist/style.css'
-
+import map from './utils/map';
 
 class App extends Component<PropsWithChildren> {
 
@@ -20,7 +20,7 @@ class App extends Component<PropsWithChildren> {
   initLocale = () => {
     console.log(this.current.router)
     const language = this.current.router?.params?.language;
-    const lang = language || cache.get(cacheKey.INTL) || process.env.INTL;
+    const lang = language || cache.get(cacheKey.INTL) || process.env.TARO_APP_INTL;
     i18n.t = new i18n(lang, locales);
     console.log('语言', lang);
     cache.set(cacheKey.INTL, lang);
@@ -28,6 +28,7 @@ class App extends Component<PropsWithChildren> {
   //在生命周期方法中初始化组件
   UNSAFE_componentWillMount() {
     this.initLocale();
+    // map.TMapGL()
   }
   componentDidMount() {
   }

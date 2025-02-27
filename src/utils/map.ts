@@ -1,9 +1,29 @@
 import Taro from '@tarojs/taro';
 import { isAlipay } from './normal';
 import { promisify } from './promisify';
+import { TMAP_KEY, DEFAULT_LAT_LNG } from './constant';
 // 定义一些常量
 const x_PI = (3.14159265358979324 * 3000.0) / 180.0;
 export default {
+  /**加载地图
+   * 经试验 不是很好的加载体验
+   */
+  TMapGL() {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = `https://map.qq.com/api/gljs?v=1.exp&key=${TMAP_KEY}`;
+      script.onerror = (err) => reject(err);
+      script.onload = () => {
+        if (window?.TMap) {
+          resolve(window?.TMap);
+        } else {
+          reject(new Error('TMap not loaded'));
+        }
+      };
+      document.head.appendChild(script);
+    });
+  },
   //打开地图
   openLocation(params) {
     const { latitude, longitude, shopName, address } = params;
@@ -112,5 +132,26 @@ export default {
     let bd_lng = z * Math.cos(theta) + 0.0065;
     let bd_lat = z * Math.sin(theta) + 0.006;
     return [bd_lng, bd_lat];
+  },
+  /**
+   * 定位，返回当前坐标 (使用腾讯地图坐标组件获取当前坐标)
+   * @returns  { Promise : {lat,lng}坐标数据 }
+   */
+  lacateCurrentPosition(): Promise<{ latitude: number; longitude: number }> {
+    return new Promise((resolve) => {
+      const geolocation = new qq.maps.Geolocation(TMAP_KEY, 'myapp');
+      geolocation.getLocation(
+        (position) => {
+          console.log('当前地理位置', position);
+          const { lat, lng } = position;
+          resolve({ latitude: lat, longitude: lng });
+        },
+        (err) => {
+          console.log('获取当前定位失败', err);
+          resolve(DEFAULT_LAT_LNG);
+        },
+        { failTipFlag: true }
+      );
+    });
   }
 };

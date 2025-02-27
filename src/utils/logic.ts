@@ -3,7 +3,7 @@
  * @description: 逻辑处理
  */
 
-import { intl, browserEnv } from './normal';
+import { intl } from './normal';
 import map from './map';
 import Taro from '@tarojs/taro';
 import router from '@/route';

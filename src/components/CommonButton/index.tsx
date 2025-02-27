@@ -7,7 +7,7 @@ import classNames from 'classnames'
 
 const CommonButton = (props: CommonButtonProps) => {
   const [loading, setLoading] = useState(false)
-  const { name = '', onClick, duration = 1500, className } = props
+  const { name = '', onClick, duration = 1500, className, block = true, icon } = props
   const clickHandler = () => {
     /**开启防抖 */
     setLoading(true)
@@ -23,7 +23,8 @@ const CommonButton = (props: CommonButtonProps) => {
       type="success"
       onClick={clickHandler}
       className={classNames(styles.button, className)}
-      block
+      block={block}
+      icon={icon}
       color="linear-gradient( 162deg, #0092F4 0%, #1377FE 100%)"
     >
       {name}

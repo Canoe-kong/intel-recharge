@@ -1,32 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  value: 0,
-  globalLoading:false
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+interface AppState {
+  globalLoading: boolean;
+  shops: any[] | null; // 显式声明联合类型
+}
+const initialState: AppState = {
+  globalLoading: false,
+  shops: null
 };
 
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
-
     showLoading(state) {
       state.globalLoading = true;
     },
     hideLoading(state) {
       state.globalLoading = false;
     },
-  },
+    updateShops(state, action: PayloadAction<any[]>) {
+      // 使用PayloadAction定义payload类型
+      state.shops = action.payload.slice(); // 简写数组拷贝
+    }
+  }
 });
 
-export const { increment, decrement, incrementByAmount,showLoading ,hideLoading} = appSlice.actions;
+export const { showLoading, hideLoading, updateShops } = appSlice.actions;
 export default appSlice.reducer;

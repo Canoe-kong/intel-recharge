@@ -1,8 +1,9 @@
-import utils from "@/utils";
-import API from "./api";
-import { cache, cacheKey } from "@/cache";
-import Taro from "@tarojs/taro";
-import { get, post } from "@/services/http";
+import utils from '@/utils';
+import API from './api';
+import { cache, cacheKey } from '@/cache';
+import Taro from '@tarojs/taro';
+import { get, post } from '@/services/http';
+import map from '@/utils/map';
 export default {
   /**
    * 获取公司信息
@@ -58,7 +59,6 @@ export default {
     }
     return { isTourist: result.data.isTourist };
   },
-
 
   async alipayInitUser(param) {
     let openId = cache.get(cacheKey.OPEN_ID);
@@ -166,17 +166,17 @@ export default {
         param:
           params.areaCode === '86'
             ? {
-              type: 'flash_power_login_confirmation',
-              platformCode: 'base',
-              ...params
-            }
+                type: 'flash_power_login_confirmation',
+                platformCode: 'base',
+                ...params
+              }
             : params.areaCode === '853'
-              ? {
+            ? {
                 type: 'mo_consumer_h5_login',
                 platformCode: 'moBase',
                 ...params
               }
-              : {
+            : {
                 type: 'hk_consumer_h5_login',
                 platformCode: 'moBase',
                 ...params
@@ -1025,17 +1025,17 @@ export default {
         param:
           params.internationalCode == '86'
             ? {
-              captchaType: 'flash_power_login_confirmation',
-              platformCode: 'base',
-              ...params
-            }
+                captchaType: 'flash_power_login_confirmation',
+                platformCode: 'base',
+                ...params
+              }
             : params.internationalCode == '853'
-              ? {
+            ? {
                 captchaType: 'mo_consumer_h5_login',
                 platformCode: 'moBase',
                 ...params
               }
-              : {
+            : {
                 captchaType: 'hk_consumer_h5_login',
                 platformCode: 'moBase',
                 ...params
